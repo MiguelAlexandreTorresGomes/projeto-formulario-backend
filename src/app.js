@@ -11,12 +11,15 @@ const port = process.env.PORT || 3000;
 
 app.use(cors({
   origin: [
-    'https://projeto-formulario-backend-production.up.railway.app/', // URL do seu frontend em produção
-    'http://localhost:4200',           // Angular local
+    'https://formulario-muiltitarefas.vercel.app',
+    'http://localhost:4200',                   
   ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
   credentials: true
 }));
+
+app.options('*', cors());
 
 app.get('/teste-conexao', (req, res) => {
   res.json({
