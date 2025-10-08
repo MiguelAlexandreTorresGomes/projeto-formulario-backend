@@ -10,18 +10,15 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: [
-    'https://formulario-muiltitarefas.vercel.app/', // URL do seu frontend em produção
-    'http://localhost:4200',           // Angular local
-  ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  origin: true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 app.get('/teste-conexao', (req, res) => {
   res.json({
     success: true,
-    message: '✅ Backend conectado com sucesso!',
+    message: 'Backend conectado com sucesso!',
     timestamp: new Date().toISOString()
   });
 });
@@ -31,7 +28,6 @@ app.use(express.json());
 const connDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log('Conectado ao mongoDB');
   } catch (error) {
     console.log('Erro ao conectar com o mongoDB', error);
   }
