@@ -11,15 +11,12 @@ const port = process.env.PORT || 3000;
 
 app.use(cors({
   origin: [
-    'https://formulario-muiltitarefas.vercel.app',
-    'http://localhost:4200',                   
+    'https://formulario-muiltitarefas.vercel.app/', // URL do seu frontend em produção
+    'http://localhost:4200',           // Angular local
   ],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
-
-app.options('*', cors());
 
 app.get('/teste-conexao', (req, res) => {
   res.json({
