@@ -2,19 +2,19 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../models/user.js";
 
-// const registerAdmin = async (req, res) => {
-//     try {
-//         const { username, password } = req.body;
-//         const hashedPassword = await bcrypt.hash(password, 10);
-//         const admin = await User.create({
-//             username,
-//             password: hashedPassword
-//         });
-//         res.status(201).json({ admin });
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// };
+const registerAdmin = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const admin = await User.create({
+            username,
+            password: hashedPassword
+        });
+        res.status(201).json({ admin });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 const login = async (req, res) => {
     try {
@@ -37,4 +37,4 @@ const login = async (req, res) => {
     }
 };
 
-export { login };
+export { registerAdmin,login };
