@@ -37,4 +37,4 @@ const login = async (req, res) => {
     }
 };
 
-export { registerAdmin, login };
+export { login };
