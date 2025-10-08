@@ -9,12 +9,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-
-
 app.use(cors({
+  origin: [
+    'https://projeto-formulario-backend-production.up.railway.app/', // URL do seu frontend em produção
+    'http://localhost:4200',           // Angular local
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
 app.get('/teste-conexao', (req, res) => {
   res.json({
     success: true,
@@ -24,6 +27,7 @@ app.get('/teste-conexao', (req, res) => {
 });
 
 app.use(express.json());
+
 const connDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
@@ -36,7 +40,6 @@ connDB()
 
 app.use('/clientes', clientesRoutes);
 app.use('/auth', authRoutes);
-
 
 app.listen(port, () => {
   console.log(`# Acesse: http://localhost:${port}`);
